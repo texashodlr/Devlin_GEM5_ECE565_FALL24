@@ -199,30 +199,24 @@ main:
 	addsd	.LC0(%rip), %xmm0
 	leaq	5008(%rsp), %rdi
 	movsd	%xmm0, 10016(%rsp,%rbx)
-	addq	$8, %rbx
 	call	_ZSt18generate_canonicalIdLm53ESt23mersenne_twister_engineImLm32ELm624ELm397ELm31ELm2567483615ELm11ELm4294967295ELm7ELm2636928640ELm15ELm4022730752ELm18ELm1812433253EEET_RT1_
 	addsd	.LC0(%rip), %xmm0
-	movsd	%xmm0, 18008(%rsp,%rbx)
+	movsd	%xmm0, 18016(%rsp,%rbx)
+	addq	$8, %rbx
 	cmpq	$8000, %rbx
 	jne	.L24
-	xorl	%esi, %esi
-	xorl	%edi, %edi
-	call	m5_dump_reset_stats
 	movsd	.LC5(%rip), %xmm1
 	xorl	%eax, %eax
 	.p2align 4,,10
 	.p2align 3
 .L26:
 	movsd	10016(%rsp,%rax), %xmm0
-	addq	$8, %rax
 	mulsd	%xmm1, %xmm0
-	addsd	18008(%rsp,%rax), %xmm0
-	movsd	%xmm0, 18008(%rsp,%rax)
+	addsd	18016(%rsp,%rax), %xmm0
+	movsd	%xmm0, 18016(%rsp,%rax)
+	addq	$8, %rax
 	cmpq	$8000, %rax
 	jne	.L26
-	xorl	%esi, %esi
-	xorl	%edi, %edi
-	call	m5_dump_reset_stats
 	xorpd	%xmm0, %xmm0
 	leaq	18016(%rsp), %rax
 	leaq	26016(%rsp), %rdx

@@ -1,6 +1,5 @@
 #include <random>
 #include <iostream>
-//#include "gem5/m5ops.h"
 
 int main()
 {
@@ -15,16 +14,13 @@ int main()
     X[i] = dis(gen);
     Y[i] = dis(gen);
     }
-    
- //   m5_dump_reset_stats(0,0);
-    //Start of DAXPY Loop Conor Devlin was here
+
+    // Start of daxpy loop
     for (int i = 0; i < N; ++i)
     {
         Y[i] = alpha * X[i] + Y[i];
     }
-    //End* (Spelling error) of DAXPY* Loop
- //   m5_dump_reset_stats(0,0);
-
+    // End of DAXPY Loop
     double sum = 0;
     for (int i = 0; i < N; ++i)
     {
