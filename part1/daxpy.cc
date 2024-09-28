@@ -17,13 +17,14 @@ int main()
     }
     
     m5_dump_reset_stats(0,0);
-    //Start of DAXPY Loop
+    //Start of DAXPY Loop Conor Devlin was here
     for (int i = 0; i < N; ++i)
     {
         Y[i] = alpha * X[i] + Y[i];
     }
-    //Emd of Daxpy loop
+    //End* (Spelling error) of DAXPY* Loop
     m5_dump_reset_stats(0,0);
+
     double sum = 0;
     for (int i = 0; i < N; ++i)
     {
