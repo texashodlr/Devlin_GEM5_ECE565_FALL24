@@ -50,10 +50,11 @@ from m5.objects import *
 from m5.params import NULL
 from m5.util import addToPath, fatal, warn
 
+from MyMinorCPU import MyMinorCPU
+
 addToPath('../')
 
 from ruby import Ruby
-
 from common import Options
 from common import Simulation
 from common import CacheConfig
@@ -64,6 +65,12 @@ from common.FileSystemConfig import config_filesystem
 from common.Caches import *
 from common.cpu2000 import *
 
+class Banana:
+    def __init__(self, fpu_operation_latency=6, fpu_issue_latency=1):
+        self.fpu_operation_latency = fpu_operation_latency
+        self.fpu_issue_latency = fpu_issue_latency
+
+
 def get_processes(args):
     """Interprets provided args and returns a list of processes"""
 
@@ -71,8 +78,7 @@ def get_processes(args):
     inputs = []
     outputs = []
     errouts = []
-    pargs = []
-
+    pargs = [] 
     workloads = args.cmd.split(';')
     if args.input != "":
         inputs = args.input.split(';')
@@ -161,10 +167,11 @@ CPUClass.numThreads = numThreads
 # Check -- do not allow SMT with multiple CPUs
 if args.smt and args.num_cpus > 1:
     fatal("You cannot use SMT with multiple CPUs!")
-
+    
+options = Banana(fpu_operation_latency=1, fpu_issue_latency=9)	
 np = args.num_cpus
 mp0_path = multiprocesses[0].executable
-system = System(cpu = [CPUClass(cpu_id=i) for i in range(np)],
+system = System(cpu = MyMinorCPU(options),
                 mem_mode = test_mem_mode,
                 mem_ranges = [AddrRange(args.mem_size)],
                 cache_line_size = args.cacheline_size)
